@@ -9,25 +9,55 @@ const somedata = [
 
 const { data } =  useFetch( () => '/api/sneakers' );
 
-const selectedImage = ref("/nikes3.png");
-function findImage(image) {
-  selectedImage.value = image;
+
+const selectedImage = ref("/blu.png");
+const selectedImageIndex = ref(null)
+const colorsCode = ref([])
+const arrImages = ref(['/blu.png', '/orange.png', '/red.png'])
+const nextSlideIndex =  0;
+const count = ref(0)
+
+function nextImage(){
+  let currentIndex = 0
+  currentIndex = (currentIndex + 1) % (arrImages.value.length + 1);
+  selectedImage.value = arrImages.value[currentIndex]
+ 
 }
 
-watch(selectedImage, () => {
-  console.log('ref now', selectedImage.value);
-});
+function findImage(customIndex, image, index, arr, color) {
+
+
+  selectedImage.value = image;
+  selectedImageIndex.value = index
+
+  colorsCode.value = arr.map((i) => i.code)
+  arrImages.value = arr.map((i) => i.image)
+
+  console.log('number from arrow', customIndex)
+  console.log('arr', arr)
+  console.log('color', color)
+  console.log('colorsCode',colorsCode.value)
+  console.log('arrImages',arrImages.value)
+  console.log('image',selectedImage.value)
+  console.log('index',selectedImageIndex.value)
+
+}
+
+// watch(selectedImage, () => {
+//   console.log('ref now', selectedImage.value);
+// });
 
 onMounted(() => {
-  selectedImage.value = "/nikes3.png";
+  selectedImage.value = "/blu.png";
 });
+
 
 </script>
 
 <template>
 
 
-    <app-header/>
+    <!-- <app-header/> -->
 
 
 <!-- Navigation Input -->
@@ -35,8 +65,7 @@ onMounted(() => {
     <div class="input_wrapper">
             <div v-for="element in inputCategory" :key="element" class="input_element">
                 <input
-                  v-model="value"
-                  :checked="value === element"
+                 
                   name="category"
                   :id="element"
                   type="radio"
@@ -61,8 +90,11 @@ onMounted(() => {
             </div>
 
             <div class="right_arrow">
-                <ArrowSvg/>
+                <ArrowSvg @click="nextImage(1)"/>
             </div>
+
+
+            
 
 
             <div class="description_left">
@@ -95,19 +127,22 @@ onMounted(() => {
           </div>
 
           <div class="left_arrow">
-            <ArrowSvg/>
+            <ArrowSvg  />
           </div>
 
           <div class="colors">
             <div class="wrapper_colors">
               <p>new arrival</p>
               <p>nike joyride</p>
-              <div v-for="(item, index) in data" :key="index">
+           
+
                 <div class="colors3">
-                  <div v-for="(color, colorIndex) in item.colors" :key="colorIndex" class="colors_container">
-                    <div class="rounded" :style="{ backgroundColor: color.code }"></div>
+                  <div v-for="(color, colorIndex) in colorsCode" :key="colorIndex" class="colors_container" >
+                    <div class="rounded" :style="{'backgroundColor': color}"></div>
                   </div>
-                </div>
+
+
+
               </div>
             </div>
           </div>
@@ -129,18 +164,18 @@ onMounted(() => {
         <p>NEW ARRIVALS COLLECTION</p>
     </div>
 
-  <div v-for="(item, index) in data" :key="item.code">
-    <div class="sneakers">
-          <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === selectedImage ? `4px solid #5CE1E6` : 'none' }">
-            <img :src="color.image" @click="findImage(color.image, colorIndex)">
+    <div v-for="(item, index) in data" :key="item.code">
+        <div class="sneakers">
+          <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === selectedImage ? '4px solid #5CE1E6' : 'none' }">
+            <img :src="color.image"  @click="findImage(0, color.image, colorIndex, item.colors, color.code )">
           </div>
-    </div>
-  </div>
+        </div>
+      </div>
+      
 
   </template>
   
   <style scoped>
-
     /* Navigation inputs Start */
   .input_container {
     display: flex;

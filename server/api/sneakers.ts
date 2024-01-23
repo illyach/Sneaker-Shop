@@ -11,12 +11,12 @@ export default defineEventHandler((event) => {
         colors: [
         {
         name: "blue",
-        code: "#60e6eb",
+        code: "#2596be",
         image: "/blue_joyride.png"
         },
         {
         name: "pink",
-        code: "#edd3f0",
+        code: "#ec9e54",
         image: "/pink_joyride.png"
         },
         {
@@ -25,7 +25,7 @@ export default defineEventHandler((event) => {
         image: "/black_joyride.png"
         }
         ],
-        color: "#ffe8f2",
+        color: "#2f170d",
         image: "/nikes3.png"
         },
         {
@@ -51,7 +51,8 @@ export default defineEventHandler((event) => {
         name: "red",
         code: "#0d0c0d",
         image: "/red.png"
-        }
+        },
+       
         ],
         color: "#ffe8f2",
         image: "/nikes3.png"
