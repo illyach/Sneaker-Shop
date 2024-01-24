@@ -16,10 +16,11 @@ const colorsCode = ref([])
 const arrImages = ref(['/blu.png', '/orange.png', '/red.png'])
 const nextSlideIndex =  0;
 const count = ref(0)
-
+let currentIndex = 0
 function nextImage(){
-  let currentIndex = 0
-  currentIndex = (currentIndex + 1) % (arrImages.value.length + 1);
+ 
+  currentIndex = (currentIndex + 1) % (arrImages.value.length);
+
   selectedImage.value = arrImages.value[currentIndex]
  
 }
@@ -90,7 +91,7 @@ onMounted(() => {
             </div>
 
             <div class="right_arrow">
-                <ArrowSvg @click="nextImage(1)"/>
+                <ArrowSvg @click="nextImage(currentIndex)"/>
             </div>
 
 
@@ -127,7 +128,7 @@ onMounted(() => {
           </div>
 
           <div class="left_arrow">
-            <ArrowSvg  />
+            <ArrowSvg @click="nextImage(currentIndex)"  />
           </div>
 
           <div class="colors">
