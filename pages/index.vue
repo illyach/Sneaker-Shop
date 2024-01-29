@@ -27,9 +27,9 @@ function nextImage(){
 
 console.log(buttonPressed.value) 
 
-  currentIndex = (currentIndex + 1) % (arrImages.value.length);
+currentIndex = (currentIndex + 1) % (arrImages.value.length);
 
-  selectedImage.value = arrImages.value[currentIndex]
+selectedImage.value = arrImages.value[currentIndex]
  
 }   
 
@@ -54,7 +54,7 @@ function findImage(customIndex, image, index, arr, color) {
 
 const buttonPressed = ref(false)
 watch(buttonPressed, () => {
-  console.log('ref now', buttonPressed.value);
+  console.log('buttonPressed', buttonPressed.value);
 });
 
 onMounted(() => {
@@ -196,7 +196,7 @@ onMounted(() => {
     <div v-for="(item, index) in data" :key="item.code">
         <div class="sneakers">
           <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === selectedImage ? '4px solid #5CE1E6' : 'none' }">
-              <img :src="color.image"  @click="findImage(0, color.image, colorIndex, item.colors, color.code )">
+              <img :src="color.image"  @click="findImage(0, color.image, colorIndex, item.colors, color.code)">
           </div>
         </div>
       </div>
@@ -396,10 +396,9 @@ onMounted(() => {
 
     /*list of sneakers section*/
   .sneaker img{
-    flex: 0 1 calc(17% - 10px);
     transform: rotate(34deg) scale(-1, 1);
     width: 180px;
-    height: 60px;
+
     margin: 4px;
     height: 160px;
     margin-top: 22px;
@@ -418,15 +417,15 @@ onMounted(() => {
     }
 
   .sneakers{
-    padding: 30px 0px 30px 0px;
+
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
     max-width: 1500px;
-    margin: 30px auto;
-    height: 600px;
-    border: 1px solid black;
+    margin: 5px auto;
+
+
   }
 /*list of sneakers section*/
 

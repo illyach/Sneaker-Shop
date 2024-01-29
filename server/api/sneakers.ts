@@ -23,7 +23,17 @@ export default defineEventHandler((event) => {
         name: "black",
         code: "#0d0c0d",
         image: "/black_joyride.png"
-        }
+        },
+        {
+            name: "bluee",
+            code: "#2f170d",
+            image: "/nikes3.png"
+        },
+        {
+            name: "blue",
+            code: "#60e6eb",
+            image: "/blu.png"
+            },
         ],
         color: "#2f170d",
         image: "/nikes3.png"
@@ -52,7 +62,16 @@ export default defineEventHandler((event) => {
         code: "#0d0c0d",
         image: "/red.png"
         },
-       
+        {
+            name: "bluee",
+            code: "#2f170d",
+            image: "/nikes3.png"
+        },
+        {
+            name: "blue",
+            code: "#60e6eb",
+            image: "/blu.png"
+            },
         ],
         color: "#ffe8f2",
         image: "/nikes3.png"
