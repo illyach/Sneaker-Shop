@@ -17,16 +17,23 @@ const arrImages = ref(['/blu.png', '/orange.png', '/red.png'])
 const nextSlideIndex =  0;
 const count = ref(0)
 let currentIndex = 0
+
 function nextImage(){
- 
+  buttonPressed.value = true
+  console.log(buttonPressed.value) 
+  setTimeout(() => {
+    buttonPressed.value = false
+}, "180");
+
+console.log(buttonPressed.value) 
+
   currentIndex = (currentIndex + 1) % (arrImages.value.length);
 
   selectedImage.value = arrImages.value[currentIndex]
  
-}
+}   
 
 function findImage(customIndex, image, index, arr, color) {
-
 
   selectedImage.value = image;
   selectedImageIndex.value = index
@@ -44,12 +51,15 @@ function findImage(customIndex, image, index, arr, color) {
 
 }
 
-// watch(selectedImage, () => {
-//   console.log('ref now', selectedImage.value);
-// });
+
+const buttonPressed = ref(false)
+watch(buttonPressed, () => {
+  console.log('ref now', buttonPressed.value);
+});
 
 onMounted(() => {
   selectedImage.value = "/blu.png";
+
 });
 
 
@@ -113,7 +123,24 @@ onMounted(() => {
             <img class="right_grapes" src="/grapes.png">
             <p class="nike">NIKE</p>
             <p class="joyride">JOYRIDE</p>
-            <div class="my_img"> <img :src="selectedImage"></div>
+
+          <Transition name="animate">
+
+              <div class="my_img"  v-if="buttonPressed" :style="'display:none'"> 
+                <div>
+                  <img :src="selectedImage" :key="selectedImage">
+                </div>
+              </div>
+
+              <div class="my_img" v-else> 
+                <div>
+                  <img :src="selectedImage" :key="selectedImage">
+                </div>
+              </div>
+    
+          </Transition>
+
+          
             <img class="left_grapes" src="/grapes.png">
         </div>
         <!-- Centered elements | name & image  -->
@@ -128,8 +155,9 @@ onMounted(() => {
           </div>
 
           <div class="left_arrow">
-            <ArrowSvg @click="nextImage(currentIndex)"  />
+            <ArrowSvg @click="nextImage(currentIndex)"  v-model="buttonPressed"/>
           </div>
+
 
           <div class="colors">
             <div class="wrapper_colors">
@@ -168,7 +196,7 @@ onMounted(() => {
     <div v-for="(item, index) in data" :key="item.code">
         <div class="sneakers">
           <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === selectedImage ? '4px solid #5CE1E6' : 'none' }">
-            <img :src="color.image"  @click="findImage(0, color.image, colorIndex, item.colors, color.code )">
+              <img :src="color.image"  @click="findImage(0, color.image, colorIndex, item.colors, color.code )">
           </div>
         </div>
       </div>
@@ -177,6 +205,17 @@ onMounted(() => {
   </template>
   
   <style scoped>
+
+  .animate-enter-active,
+  .animate-leave-active {
+    transition: opacity 0.5s ease;
+  }
+  
+  .animate-enter-from,
+  .animate-leave-to {
+    opacity: 0;
+  }
+
     /* Navigation inputs Start */
   .input_container {
     display: flex;
