@@ -58,7 +58,7 @@ watch(buttonPressed, () => {
 });
 
 onMounted(() => {
-  selectedImage.value = "/blu.png";
+  selectedImage.value = "/blu_fly_by_mid.png";
 
 });
 

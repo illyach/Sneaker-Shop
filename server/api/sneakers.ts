@@ -12,12 +12,12 @@ export default defineEventHandler((event) => {
         {
         name: "blue",
         code: "#2596be",
-        image: "/blue_joyride.png"
+        image: "/orange_joyride.png"
         },
         {
         name: "pink",
         code: "#ec9e54",
-        image: "/pink_joyride.png"
+        image: "/violet_joyride.png"
         },
         {
         name: "black",
@@ -27,12 +27,12 @@ export default defineEventHandler((event) => {
         {
             name: "bluee",
             code: "#2f170d",
-            image: "/nikes3.png"
+            image: "/teal_joyride.png"
         },
         {
             name: "blue",
             code: "#60e6eb",
-            image: "/blu.png"
+            image: "/green_joyride.png"
             },
         ],
         color: "#2f170d",
@@ -50,27 +50,27 @@ export default defineEventHandler((event) => {
         {
         name: "blue",
         code: "#60e6eb",
-        image: "/blu.png"
+        image: "/blu_fly_by_mid.png"
         },
         {
         name: "orange",
         code: "#edd3f0",
-        image: "/orange.png"
+        image: "/white_fly_by_mid.png"
         },
         {
         name: "red",
         code: "#0d0c0d",
-        image: "/red.png"
+        image: "/orange_fly_by_mid.png"
         },
         {
             name: "bluee",
             code: "#2f170d",
-            image: "/nikes3.png"
+            image: "/green_fly_by_mid.png"
         },
         {
             name: "blue",
             code: "#60e6eb",
-            image: "/blu.png"
+            image: "/black_fly_by_mid.png"
             },
         ],
         color: "#ffe8f2",
