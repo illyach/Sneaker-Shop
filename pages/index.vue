@@ -1,25 +1,24 @@
 <script setup>
 const inputCategory = ["Home", "New Arrivals", "Sale", "Clothing" ]
 
-const somedata = [
-{color: '#98F1E7'},
-{color: '#FF6230'}, 
-{color: '#8133FF'}
-]
-
 const { data } =  useFetch( () => '/api/sneakers' );
 
 
 const selectedImage = ref("/blu.png");
-const selectedImageIndex = ref(null)
+const selectedImageIndex = ref(null);
+const selectedImageColor = ref(null);
+const selectedImageArray = ref([]);
+const selectedColorImage = ref('')
 const colorsCode = ref([])
 const arrImages = ref(['/blu_fly_by_mid.png', '/orange_fly_by_mid.png', '/white_fly_by_mid.png'])
+const isBorderVisible = ref(false)
 const nextSlideIndex =  0;
 const count = ref(0)
 let currentIndex = 0
 
 function nextImage(){
   buttonPressed.value = true
+
   console.log(buttonPressed.value)
 
   setTimeout(() => {
@@ -31,20 +30,31 @@ console.log(buttonPressed.value)
 currentIndex = (currentIndex + 1) % (arrImages.value.length);
 
 selectedImage.value = arrImages.value[currentIndex]
- 
-}   
+}
+function  findColorImage(colorCode, arr){
+  isBorderVisible.value = !isBorderVisible.value
+  let findColorImageCode = arr.find((i) => i.code === colorCode).code
+  let findColorCodeImage = arr.find((i) => i.code === colorCode).image
+  selectedColorImage.value = findColorImageCode
+  selectedImage.value = findColorCodeImage
+  console.log('selectedColorImage', selectedColorImage.value)
+  console.log('findColorCodeImage', selectedImage.value)
+}
 
-function findImage(customIndex, image, index, arr, color) {
+
+function findImage(image, index, arr, color) {
 
   selectedImage.value = image;
   selectedImageIndex.value = index
-
+  selectedImageColor.value = color
+  selectedImageArray.value = arr
   colorsCode.value = arr.map((i) => i.code)
   arrImages.value = arr.map((i) => i.image)
 
-  console.log('number from arrow', customIndex)
+  console.log('big arr', selectedImageArray.value)
   console.log('arr', arr)
-  console.log('color', color)
+  console.log('color', selectedImageColor.value)
+  console.log('colorRef', color)
   console.log('colorsCode',colorsCode.value)
   console.log('arrImages',arrImages.value)
   console.log('image',selectedImage.value)
@@ -61,7 +71,11 @@ onMounted(() => {
   selectedImage.value = "/blu_fly_by_mid.png";
 });
 
-
+// const borderObject = {
+//   border: "0.14rem solid black",
+//   borderRadius: "50%"
+// }
+const borderObject = "0.14rem solid black";
 </script>
 
 <template>
@@ -101,10 +115,6 @@ onMounted(() => {
             <div class="right_arrow">
                 <ArrowSvg @click="nextImage(currentIndex)"/>
             </div>
-
-
-            
-
 
             <div class="description_left">
                 <p>ABSORBS THE IMPACT</p>
@@ -164,11 +174,11 @@ onMounted(() => {
            
 
                 <div class="colors3">
-                  <div v-for="(color, colorIndex) in colorsCode" :key="colorIndex" class="colors_container" >
-                    <div class="rounded" :style="{'backgroundColor': color}"></div>
+
+
+                  <div v-for="(color, colorIndex) in colorsCode" :key="colorIndex" class="colors_container"   >
+                    <div @click="findColorImage(color, selectedImageArray)" class="rounded" :style="{ 'backgroundColor': color, 'border': isBorderVisible ? borderObject : 'none' }"></div>
                   </div>
-
-
 
               </div>
             </div>
@@ -194,7 +204,7 @@ onMounted(() => {
     <div v-for="(item, index) in data" :key="item.code">
         <div class="sneakers">
           <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === selectedImage ? '4px solid #5CE1E6' : 'none' }">
-              <img :src="color.image"  @click="findImage(0, color.image, colorIndex, item.colors, color.code)">
+              <img :src="color.image"  @click="findImage(color.image, colorIndex, item.colors, color.code)">
           </div>
         </div>
       </div>
@@ -203,6 +213,10 @@ onMounted(() => {
   </template>
   
   <style scoped>
+  .border_visible{
+    border:0.14rem solid black;
+    border-radius: 50%;
+  }
 
   .animate-enter-active,
   .animate-leave-active {
@@ -283,8 +297,6 @@ onMounted(() => {
 }
     /* ARROW SVG  END */
 
-
-
 /* right description and left description */
 
   .description_left{
@@ -302,8 +314,6 @@ onMounted(() => {
   line-height: 3px;
   letter-spacing: 0em;
   text-align: left;
-  
-
 }
 
 
@@ -387,7 +397,7 @@ onMounted(() => {
       width: 34px;
       height: 34px;
       border-radius: 20px;
-      border: 3.3px solid #fffefe
+      border: 3px solid #fffefe;
     }
     /*  colors rounded | select sneaker color */
 
@@ -411,7 +421,7 @@ onMounted(() => {
       margin: 4px;
       background-color: #ededed;
       border-radius: 30px;
-      
+      box-sizing: border-box;
     }
 
   .sneakers{

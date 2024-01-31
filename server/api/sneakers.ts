@@ -35,8 +35,7 @@ export default defineEventHandler((event) => {
             image: "/green_joyride.png"
             },
         ],
-        color: "#2f170d",
-        image: "/nikes3.png"
+
         },
         {
         id: 2,
@@ -73,8 +72,7 @@ export default defineEventHandler((event) => {
             image: "/black_fly_by_mid.png"
             },
         ],
-        color: "#ffe8f2",
-        image: "/nikes3.png"
+
         }
         ]
         
