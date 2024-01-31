@@ -13,14 +13,15 @@ const { data } =  useFetch( () => '/api/sneakers' );
 const selectedImage = ref("/blu.png");
 const selectedImageIndex = ref(null)
 const colorsCode = ref([])
-const arrImages = ref(['/blu.png', '/orange.png', '/red.png'])
+const arrImages = ref(['/blu_fly_by_mid.png', '/orange_fly_by_mid.png', '/white_fly_by_mid.png'])
 const nextSlideIndex =  0;
 const count = ref(0)
 let currentIndex = 0
 
 function nextImage(){
   buttonPressed.value = true
-  console.log(buttonPressed.value) 
+  console.log(buttonPressed.value)
+
   setTimeout(() => {
     buttonPressed.value = false
 }, "180");
@@ -48,7 +49,6 @@ function findImage(customIndex, image, index, arr, color) {
   console.log('arrImages',arrImages.value)
   console.log('image',selectedImage.value)
   console.log('index',selectedImageIndex.value)
-
 }
 
 
@@ -59,7 +59,6 @@ watch(buttonPressed, () => {
 
 onMounted(() => {
   selectedImage.value = "/blu_fly_by_mid.png";
-
 });
 
 
@@ -76,7 +75,6 @@ onMounted(() => {
     <div class="input_wrapper">
             <div v-for="element in inputCategory" :key="element" class="input_element">
                 <input
-                 
                   name="category"
                   :id="element"
                   type="radio"

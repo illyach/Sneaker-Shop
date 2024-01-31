@@ -11,27 +11,27 @@ export default defineEventHandler((event) => {
         colors: [
         {
         name: "blue",
-        code: "#2596be",
+        code: "#fca103",
         image: "/orange_joyride.png"
         },
         {
         name: "pink",
-        code: "#ec9e54",
+        code: "#db09bc",
         image: "/violet_joyride.png"
         },
         {
         name: "black",
-        code: "#0d0c0d",
+        code: "#131414",
         image: "/black_joyride.png"
         },
         {
             name: "bluee",
-            code: "#2f170d",
+            code: "#15cbeb",
             image: "/teal_joyride.png"
         },
         {
             name: "blue",
-            code: "#60e6eb",
+            code: "#aefaaa",
             image: "/green_joyride.png"
             },
         ],
@@ -49,27 +49,27 @@ export default defineEventHandler((event) => {
         colors: [
         {
         name: "blue",
-        code: "#60e6eb",
+        code: "#290ac4",
         image: "/blu_fly_by_mid.png"
         },
         {
         name: "orange",
-        code: "#edd3f0",
+        code: "#d2d2d2",
         image: "/white_fly_by_mid.png"
         },
         {
         name: "red",
-        code: "#0d0c0d",
+        code: "#ffb469",
         image: "/orange_fly_by_mid.png"
         },
         {
             name: "bluee",
-            code: "#2f170d",
+            code: "#30483a",
             image: "/green_fly_by_mid.png"
         },
         {
             name: "blue",
-            code: "#60e6eb",
+            code: "#0f0f0f",
             image: "/black_fly_by_mid.png"
             },
         ],
