@@ -25,7 +25,7 @@ function nextImage(){
     buttonPressed.value = false
 }, "180");
 
-console.log(buttonPressed.value) 
+console.log(buttonPressed.value)
 
 currentIndex = (currentIndex + 1) % (arrImages.value.length);
 
@@ -81,7 +81,7 @@ const borderObject = "0.14rem solid black";
 <template>
 
 
-    <!-- <app-header/> -->
+     <app-header/>
 
 
 <!-- Navigation Input -->
@@ -134,21 +134,21 @@ const borderObject = "0.14rem solid black";
 
           <Transition name="animate">
 
-              <div class="my_img"  v-if="buttonPressed" :style="'display:none'"> 
+              <div class="my_img"  v-if="buttonPressed" :style="'display:none'">
                 <div>
                   <img :src="selectedImage" :key="selectedImage">
                 </div>
               </div>
 
-              <div class="my_img" v-else> 
+              <div class="my_img" v-else>
                 <div>
                   <img :src="selectedImage" :key="selectedImage">
                 </div>
               </div>
-    
+
           </Transition>
 
-          
+
             <img class="left_grapes" src="/grapes.png">
         </div>
         <!-- Centered elements | name & image  -->
@@ -171,7 +171,7 @@ const borderObject = "0.14rem solid black";
             <div class="wrapper_colors">
               <p>new arrival</p>
               <p>nike joyride</p>
-           
+
 
                 <div class="colors3">
 
@@ -208,10 +208,10 @@ const borderObject = "0.14rem solid black";
           </div>
         </div>
       </div>
-      
+
 
   </template>
-  
+
   <style scoped>
   .border_visible{
     border:0.14rem solid black;
@@ -222,7 +222,7 @@ const borderObject = "0.14rem solid black";
   .animate-leave-active {
     transition: opacity 0.5s ease;
   }
-  
+
   .animate-enter-from,
   .animate-leave-to {
     opacity: 0;
@@ -242,13 +242,13 @@ const borderObject = "0.14rem solid black";
     margin-bottom: 60px;
     box-shadow: 0px 4px 20px 0px #8E8E8E1A;
   }
-  
+
   .input_wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  
+
   .input_element input {
     display: none;
   }
@@ -257,7 +257,7 @@ const borderObject = "0.14rem solid black";
     margin-left: 40px;
     margin-right: 40px;
   }
-  
+
   .input_element label {
     display: flex;
     justify-content: center;
@@ -272,7 +272,7 @@ const borderObject = "0.14rem solid black";
     cursor: pointer;
     height: 40px;
   }
-  
+
   .input_element input:checked ~ label {
     background: #1E1E1E;
     border-radius: 30px;
@@ -302,7 +302,7 @@ const borderObject = "0.14rem solid black";
   .description_left{
     padding-left: 30px;
   }
-  
+
  .description_right{
     padding-left: 30px;
  }
@@ -326,7 +326,7 @@ const borderObject = "0.14rem solid black";
   text-align: left;
   color: #7E7E7E;
   }
-  
+
   .description_left  :nth-child(1){
   font-family: Roboto, sans-serif;
   font-size: 19px;
@@ -334,7 +334,7 @@ const borderObject = "0.14rem solid black";
   letter-spacing: 0em;
   text-align: left;
   }
-  
+
   .description_left :nth-child(2){
   font-family: Roboto Thin, sans-serif;
   font-size: 19px;
@@ -372,7 +372,7 @@ const borderObject = "0.14rem solid black";
     gap:15px;
     }
 
-    
+
     .colors p:nth-child(2){
       font-family: Roboto, sans-serif;
       text-transform: uppercase;
@@ -381,7 +381,7 @@ const borderObject = "0.14rem solid black";
 
       transform: skew( -0.152rad);
     }
-    
+
     .colors p:nth-child(1){
     color: #5CE1E6;
     font-family: Roboto, sans-serif;
@@ -391,7 +391,7 @@ const borderObject = "0.14rem solid black";
     letter-spacing: 0em;
 
     }
-    
+
 
     .rounded{
       width: 34px;
@@ -475,7 +475,7 @@ const borderObject = "0.14rem solid black";
     display: flex;
     justify-content: center;
   }
-  
+
   .header {
     display: flex;
     flex-wrap: wrap;
@@ -487,11 +487,11 @@ const borderObject = "0.14rem solid black";
     border: 1px solid black;
     align-content: space-between
   }
-  
+
   .header > div:not(.name):not(.image):not(.r) {
     width: 270px;
     height: 130px;
-    margin: 10px; 
+    margin: 10px;
   }
 
   .nike{
@@ -504,7 +504,7 @@ const borderObject = "0.14rem solid black";
     z-index: -1;
     width: 267px;
     height: 90px;
-   
+
     font-family: Roboto, sans-serif;
     font-size: 148px;
     font-style: italic;
@@ -550,7 +550,7 @@ position: absolute;
     margin-top: 70px;
 }
 
-  
+
   .date ul li:nth-child(3){
     color: #7E7E7E;
     font-family: Roboto, sans-serif;
@@ -559,8 +559,8 @@ position: absolute;
     line-height: 28px;
     letter-spacing: 0em;
     text-align: left;
-    
-    
+
+
     }
 
     /* realse date section  */
@@ -572,9 +572,9 @@ position: absolute;
     letter-spacing: 0em;
     text-align: left;
     transform: skew( -0.152rad);
-    
+
     }
-    
+
     .date ul li:nth-child(1){
       color: #5CE1E6;
       font-family: Roboto, sans-serif;
@@ -583,8 +583,8 @@ position: absolute;
     line-height: 28px;
     letter-spacing: 0em;
     text-align: left;
-    
-    
+
+
     }
 
     .date ul{
