@@ -17,6 +17,7 @@ const count = ref(0)
 let currentIndex = 0
 
 function nextImage(){
+  borderObject = 'none'
   buttonPressed.value = true
 
   console.log(buttonPressed.value)
@@ -32,6 +33,7 @@ currentIndex = (currentIndex + 1) % (arrImages.value.length);
 selectedImage.value = arrImages.value[currentIndex]
 }
 function  findColorImage(colorCode, arr){
+  borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
   isBorderVisible.value = !isBorderVisible.value
   let findColorImageCode = arr.find((i) => i.code === colorCode).code
   let findColorCodeImage = arr.find((i) => i.code === colorCode).image
@@ -43,7 +45,7 @@ function  findColorImage(colorCode, arr){
 
 
 function findImage(image, index, arr, color) {
-
+  borderObject = 'none'
   selectedImage.value = image;
   selectedImageIndex.value = index
   selectedImageColor.value = color
@@ -75,7 +77,7 @@ onMounted(() => {
 //   border: "0.14rem solid black",
 //   borderRadius: "50%"
 // }
-const borderObject = "0.14rem solid black";
+let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
 </script>
 
 <template>
@@ -176,8 +178,8 @@ const borderObject = "0.14rem solid black";
                 <div class="colors3">
 
 
-                  <div v-for="(color, colorIndex) in colorsCode" :key="colorIndex" class="colors_container"   >
-                    <div @click="findColorImage(color, selectedImageArray)" class="rounded" :style="{ 'backgroundColor': color, 'border': isBorderVisible ? borderObject : 'none' }"></div>
+                  <div v-for="(color, colorIndex) in colorsCode" :key="colorIndex" class="colors_container"    >
+                    <div @click="findColorImage(color, selectedImageArray)" class="rounded" :style="{ 'backgroundColor': color, 'box-shadow': color === selectedColorImage ? borderObject : 'none' }"></div>
                   </div>
 
               </div>
@@ -392,12 +394,14 @@ const borderObject = "0.14rem solid black";
 
     }
 
+.colors_container{
+  border-radius: 50%;
 
+}
     .rounded{
       width: 34px;
       height: 34px;
-      border-radius: 20px;
-      border: 3px solid #fffefe;
+      border-radius: 50%;
     }
     /*  colors rounded | select sneaker color */
 

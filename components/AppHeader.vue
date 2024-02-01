@@ -15,7 +15,7 @@
         <ProfileSvg/>
       </div>
     </div>
-    
+
   </div>
 </template>
 
