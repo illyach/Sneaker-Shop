@@ -3,81 +3,76 @@ const inputCategory = ["Home", "New Arrivals", "Sale", "Clothing" ]
 
 const { data } =  useFetch( () => '/api/sneakers' );
 
+const main = reactive({
+      selectedImage: '/blu_fly_by_mid.png',
+      selectedImageIndex: null,
+      selectedImageColor: null, 
+      selectedImageArray: [],
+      selectedColorImage: '',
+      selectedSneakerName: 'JOYRIDE',
+      selectedSneakerNameFirstWord: '',
+      selectedSneakerNameSecondWord: '',
+      colorsCode: [],
+      arrImages:['/blu_fly_by_mid.png', '/orange_fly_by_mid.png', '/white_fly_by_mid.png']
+})
 
-const selectedImage = ref("/blu.png");
-const selectedImageIndex = ref(null);
-const selectedImageColor = ref(null);
-const selectedImageArray = ref([]);
-const selectedColorImage = ref('')
-const colorsCode = ref([])
-const arrImages = ref(['/blu_fly_by_mid.png', '/orange_fly_by_mid.png', '/white_fly_by_mid.png'])
-const isBorderVisible = ref(false)
-const nextSlideIndex =  0;
-const count = ref(0)
+
+const buttonPressed = ref(false)
+
+let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
+
 let currentIndex = 0
 
 function nextImage(){
   borderObject = 'none'
   buttonPressed.value = true
 
-  console.log(buttonPressed.value)
-
   setTimeout(() => {
     buttonPressed.value = false
 }, "180");
 
-console.log(buttonPressed.value)
+currentIndex = (currentIndex + 1) % (main.arrImages.length);
 
-currentIndex = (currentIndex + 1) % (arrImages.value.length);
-
-selectedImage.value = arrImages.value[currentIndex]
+main.selectedImage = main.arrImages[currentIndex]
 }
+
+
 function  findColorImage(colorCode, arr){
   borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
-  isBorderVisible.value = !isBorderVisible.value
+
   let findColorImageCode = arr.find((i) => i.code === colorCode).code
   let findColorCodeImage = arr.find((i) => i.code === colorCode).image
-  selectedColorImage.value = findColorImageCode
-  selectedImage.value = findColorCodeImage
-  console.log('selectedColorImage', selectedColorImage.value)
-  console.log('findColorCodeImage', selectedImage.value)
+  main.selectedColorImage = findColorImageCode
+  main.selectedImage = findColorCodeImage
+  console.log("findColorImage-------------")
+  console.log('selectedColorImage', main.selectedColorImage)
+  console.log('findColorCodeImage', main.selectedImage)
 }
 
 
-function findImage(image, index, arr, color) {
+function findImage(image, index, arr, color, sneaker_name) {
   borderObject = 'none'
-  selectedImage.value = image;
-  selectedImageIndex.value = index
-  selectedImageColor.value = color
-  selectedImageArray.value = arr
-  colorsCode.value = arr.map((i) => i.code)
-  arrImages.value = arr.map((i) => i.image)
-
-  console.log('big arr', selectedImageArray.value)
-  console.log('arr', arr)
-  console.log('color', selectedImageColor.value)
-  console.log('colorRef', color)
-  console.log('colorsCode',colorsCode.value)
-  console.log('arrImages',arrImages.value)
-  console.log('image',selectedImage.value)
-  console.log('index',selectedImageIndex.value)
+  main.selectedImage = image;
+  main.selectedImageIndex = index
+  main.selectedImageColor = color
+  main.selectedImageArray = arr
+  main.selectedSneakerName = sneaker_name.replace("NIKE ", "").replace(" ", "");
+  main.colorsCode = arr.map((i) => i.code)
+  main.arrImages = arr.map((i) => i.image)
+  console.log('------------------');
+  console.log('sneakerName', main.selectedSneakerName);
+console.log('big arr', main.selectedImageArray);
+console.log('arr', arr);
+console.log('color', main.selectedImageColor);
+console.log('colorRef', color);
+console.log('colorsCode', main.colorsCode);
+console.log('arrImages', main.arrImages);
+console.log('image', main.selectedImage);
+console.log('index', main.selectedImageIndex);
 }
 
 
-const buttonPressed = ref(false)
-watch(buttonPressed, () => {
-  console.log('buttonPressed', buttonPressed.value);
-});
 
-onMounted(() => {
-  selectedImage.value = "/blu_fly_by_mid.png";
-});
-
-// const borderObject = {
-//   border: "0.14rem solid black",
-//   borderRadius: "50%"
-// }
-let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
 </script>
 
 <template>
@@ -131,20 +126,22 @@ let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
             <!-- Centered elements | sneaker model NAME & sneaker IMAGE -->
           <div class="name">
             <img class="right_grapes" src="/grapes.png">
-            <p class="nike">NIKE</p>
-            <p class="joyride">JOYRIDE</p>
+            <p class="nike">&nbsp;NIKE</p>
+            <p class="joyride" :style="{ 'padding-left': main.selectedSneakerName === 'JOYRIDE' || (main.selectedSneakerName.charAt(0) === 'A') ? '200px' : '0px' }">
+              {{main.selectedSneakerName}}
+            </p>
 
           <Transition name="animate">
 
               <div class="my_img"  v-if="buttonPressed" :style="'display:none'">
                 <div>
-                  <img :src="selectedImage" :key="selectedImage">
+                  <img :src="main.selectedImage" :key="main.selectedImage">
                 </div>
               </div>
 
               <div class="my_img" v-else>
                 <div>
-                  <img :src="selectedImage" :key="selectedImage">
+                  <img :src="main.selectedImage" :key="main.selectedImage" >
                 </div>
               </div>
 
@@ -165,7 +162,7 @@ let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
           </div>
 
           <div class="left_arrow">
-            <ArrowSvg @click="nextImage(currentIndex)"  v-model="buttonPressed"/>
+            <ArrowSvg @click="nextImage(currentIndex)"  />
           </div>
 
 
@@ -177,9 +174,8 @@ let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
 
                 <div class="colors3">
 
-
-                  <div v-for="(color, colorIndex) in colorsCode" :key="colorIndex" class="colors_container"    >
-                    <div @click="findColorImage(color, selectedImageArray)" class="rounded" :style="{ 'backgroundColor': color, 'box-shadow': color === selectedColorImage ? borderObject : 'none' }"></div>
+                  <div v-for="(color, colorIndex) in main.colorsCode" :key="colorIndex" class="colors_container"    >
+                    <div @click="findColorImage(color, main.selectedImageArray)" class="rounded" :style="{ 'backgroundColor': color, 'box-shadow': color === main.selectedColorImage ? borderObject : 'none' }"></div>
                   </div>
 
               </div>
@@ -203,10 +199,11 @@ let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
         <p>NEW ARRIVALS COLLECTION</p>
     </div>
 
+<!-- sneakers -->
     <div v-for="(item, index) in data" :key="item.code">
         <div class="sneakers">
-          <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === selectedImage ? '4px solid #5CE1E6' : 'none' }">
-              <img :src="color.image"  @click="findImage(color.image, colorIndex, item.colors, color.code)">
+          <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === main.selectedImage ? '4px solid #5CE1E6' : 'none' }">
+              <img :src="color.image"  @click="findImage(color.image, colorIndex, item.colors, color.code, data.find((i) => i.colors.some((e) => e.image === color.image)).name)">
           </div>
         </div>
       </div>
@@ -410,7 +407,6 @@ let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
   .sneaker img{
     transform: rotate(34deg) scale(-1, 1);
     width: 180px;
-
     margin: 4px;
     height: 160px;
     margin-top: 22px;
@@ -419,6 +415,7 @@ let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
   }
 
     .sneaker {
+
       flex: 0 1 calc(17% - 10px);
       width: 200px;
       height: 160px;
@@ -518,16 +515,20 @@ let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
     text-align: left;
     color:#F1F1F1;
 }
-
+.nike_name{
+margin-left: 15px;
+}
 .joyride{
+  white-space: nowrap;
+
     position: absolute;
     padding-top:300px;
-    padding-left:200px;
+
    width: 10px;
    height: 10px;
     z-index: -1;
-    width: 267px;
-    height: 90px;
+    width: 230px;
+    height: 70px;
     margin-top:30px;
     font-family: Roboto, sans-serif;
     font-size: 148px;
