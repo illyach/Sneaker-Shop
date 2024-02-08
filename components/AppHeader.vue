@@ -2,20 +2,32 @@
   <div class="elements">
 
       <div class="seacrh-svg">
-        <SearchSvg/>
+        <div>
+          <img src="assets/search.svg" alt="SVG search" />
+        </div>
       </div>
 
     <div class="logo-svg">
-      <LogoSvg/>
-    </div>
-
-    <div class="bag-svg">
-       <BagSvg/>
-      <div class="profile">
-        <ProfileSvg/>
+      <div>
+        <img src="assets/logo.svg" alt="SVG logo" />
       </div>
     </div>
 
+    <div class="bag-svg">
+
+      <div>
+        <img src="assets/bag.svg" alt="SVG bag" />
+      </div>
+ 
+
+      <div class="profile">
+        <div>
+          <img src="assets/profile.svg" alt="SVG profile" />
+        </div>
+      </div>
+
+
+    </div>
   </div>
 </template>
 

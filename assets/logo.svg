@@ -1,5 +1,4 @@
-<template>
-  <svg width="206" height="60" viewBox="0 0 143 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="206" height="60" viewBox="0 0 143 40" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <rect width="142.857" height="40" fill="url(#pattern0)" style="mix-blend-mode:multiply"/>
     <defs>
       <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -9,15 +8,3 @@
     </defs>
   </svg>
 
-</template>
-
-
-<script>
-export default {
-  name: "LogoSvg"
-}
-</script>
-
-<style  scoped>
-
-</style>

@@ -136,8 +136,11 @@ console.log('index', main.selectedImageIndex);
 
 
               <div :class="{ pressAnimation: button.left }">
-                <div class="left_arrow">
-                <ArrowSvg @click="nextImage(currentIndex), leftButtonAnimation()"/>
+                <div class="left_arrow" >
+
+                <div @click="nextImage(currentIndex), leftButtonAnimation()">
+                  <img  src="assets/arrow.svg" alt="SVG search" />
+                </div>
               </div>
               </div>
             
@@ -193,7 +196,9 @@ console.log('index', main.selectedImageIndex);
 
           <div :class="{ pressAnimation: button.right }">
               <div class="right_arrow">
-                <ArrowSvg @click="nextImage(currentIndex), rightButtonAnimation()"  />
+                <div @click="nextImage(currentIndex), rightButtonAnimation()">
+                  <img  src="assets/arrow.svg" alt="SVG search" />
+                </div>
               </div>
         </div>
 
