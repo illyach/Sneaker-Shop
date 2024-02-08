@@ -16,20 +16,44 @@ const main = reactive({
       arrImages:['/blu_fly_by_mid.png', '/orange_fly_by_mid.png', '/white_fly_by_mid.png']
 })
 
+const button = reactive({
+  right: false,
+  left: false
+})
 
 const buttonPressed = ref(false)
+
 
 let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
 
 let currentIndex = 0
 
+function rightButtonAnimation(){
+  button.right = true
+
+  setTimeout(() => {
+    button.right = false 
+  }, 180)
+}
+
+function leftButtonAnimation(){
+  button.left = true
+
+  setTimeout(() => {
+    button.left = false
+  }, 180)
+}
+
+
+
 function nextImage(){
   borderObject = 'none'
   buttonPressed.value = true
+  
 
   setTimeout(() => {
     buttonPressed.value = false
-}, "180");
+}, 180);
 
 currentIndex = (currentIndex + 1) % (main.arrImages.length);
 
@@ -109,9 +133,15 @@ console.log('index', main.selectedImageIndex);
                     </ul>
             </div>
 
-            <div class="right_arrow">
-                <ArrowSvg @click="nextImage(currentIndex)"/>
-            </div>
+
+
+              <div :class="{ pressAnimation: button.left }">
+                <div class="left_arrow">
+                <ArrowSvg @click="nextImage(currentIndex), leftButtonAnimation()"/>
+              </div>
+              </div>
+            
+
 
             <div class="description_left">
                 <p>ABSORBS THE IMPACT</p>
@@ -161,10 +191,11 @@ console.log('index', main.selectedImageIndex);
                       <p>Designed to work for every runner, at every stage of their journey.</p>
           </div>
 
-          <div class="left_arrow">
-            <ArrowSvg @click="nextImage(currentIndex)"  />
-          </div>
-
+          <div :class="{ pressAnimation: button.right }">
+              <div class="right_arrow">
+                <ArrowSvg @click="nextImage(currentIndex), rightButtonAnimation()"  />
+              </div>
+        </div>
 
           <div class="colors">
             <div class="wrapper_colors">
@@ -212,6 +243,23 @@ console.log('index', main.selectedImageIndex);
   </template>
 
   <style scoped>
+
+  .pressAnimation {
+    animation: press 0.2s 1 linear;
+  }
+  
+  @keyframes press {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.94);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
   .border_visible{
     border:0.14rem solid black;
     border-radius: 50%;
@@ -285,15 +333,17 @@ console.log('index', main.selectedImageIndex);
 
 
     /* ARROW SVG */
-.right_arrow{
+.left_arrow{
    display: flex;
    padding-left: 30px;
 }
 
-.left_arrow{
+.right_arrow{
     transform:scale(-1,1);
     padding-left: 30px;
 }
+
+
     /* ARROW SVG  END */
 
 /* right description and left description */
