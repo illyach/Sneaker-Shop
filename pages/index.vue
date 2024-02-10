@@ -248,7 +248,9 @@ console.log('index', main.selectedImageIndex);
   </template>
 
   <style scoped>
-
+  body {
+    background-color: #f0f0f0;
+  }
   .pressAnimation {
     animation: press 0.2s 1 linear;
   }

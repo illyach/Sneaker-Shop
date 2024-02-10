@@ -39,12 +39,12 @@ export default defineEventHandler((event) => {
         },
         {
         id: 2,
-        name: "NIKE AIR MAX 1",
-        title: "ABSORBS THE IMPACT",
-        description: "That soft ride doesn’t just go easy on your feet—it helps your whole body feel good.",
-        title_two: "Feels Fresh Every Run",
-        description_two: "Designed to work for every runner, at every stage of their journey.",
-        date: "DECEMBER 31, 2022",
+        name: "FLY...MID 3",
+        title: "TRACTION OUTSOLE",
+        description: "Enhances agility, quick cuts, and overall performance during gameplay.",
+        title_two: "Ventilation Panels",
+        description_two: "Contributes to overall comfort and helps keep feet cool during intense basketball games.",
+        date: "DECEMBER 27, 2022",
         colors: [
         {
         name: "blue",
