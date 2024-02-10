@@ -13,7 +13,15 @@ const main = reactive({
       selectedSneakerNameFirstWord: '',
       selectedSneakerNameSecondWord: '',
       colorsCode: [],
-      arrImages:['/blu_fly_by_mid.png', '/orange_fly_by_mid.png', '/white_fly_by_mid.png']
+      arrImages:['/blu_fly_by_mid.png', '/orange_fly_by_mid.png', '/white_fly_by_mid.png'],
+      title: '',
+      titleTwo: '',
+      description: '',
+      descriptionTwo: '',
+      date: '',
+      sneakerName: ''
+
+
 })
 
 const button = reactive({
@@ -74,7 +82,7 @@ function  findColorImage(colorCode, arr){
 }
 
 
-function findImage(image, index, arr, color, sneaker_name) {
+function findImage(image, index, arr, color, sneaker_name, title, description, title_two, description_two, date ) {
   borderObject = 'none'
   main.selectedImage = image;
   main.selectedImageIndex = index
@@ -83,16 +91,12 @@ function findImage(image, index, arr, color, sneaker_name) {
   main.selectedSneakerName = sneaker_name.replace("NIKE ", "").replace(" ", "");
   main.colorsCode = arr.map((i) => i.code)
   main.arrImages = arr.map((i) => i.image)
-  console.log('------------------');
-  console.log('sneakerName', main.selectedSneakerName);
-console.log('big arr', main.selectedImageArray);
-console.log('arr', arr);
-console.log('color', main.selectedImageColor);
-console.log('colorRef', color);
-console.log('colorsCode', main.colorsCode);
-console.log('arrImages', main.arrImages);
-console.log('image', main.selectedImage);
-console.log('index', main.selectedImageIndex);
+  main.title = title
+  main.titleTwo = title_two
+  main.description = description
+  main.descriptionTwo = description_two
+  main.sneakerName = sneaker_name
+  main.date = date
 }
 
 
@@ -128,7 +132,7 @@ console.log('index', main.selectedImageIndex);
             <div class="date">
                     <ul>
                         <li>realse date</li>
-                        <li>january 6, 2023</li>
+                        <li>{{main.date}}</li>
                         <li>limited stocks only</li>
                     </ul>
             </div>
@@ -147,10 +151,8 @@ console.log('index', main.selectedImageIndex);
 
 
             <div class="description_left">
-                <p>ABSORBS THE IMPACT</p>
-                <p>That soft ride doesn’t just go
-                    easy on your feet—it helps your
-                   whole body feel good.</p>
+                <p>{{main.title}}</p>
+                <p>{{main.description}}</p>
             </div>
           <!--      Left side of the page -->
 
@@ -190,8 +192,8 @@ console.log('index', main.selectedImageIndex);
     <!--Right side of the page-->
           <div class="r" />
          <div class="description_right">
-                      <p>FRESH EVERY EVERY FUN</p>
-                      <p>Designed to work for every runner, at every stage of their journey.</p>
+                      <p>{{main.titleTwo.toUpperCase()}}</p>
+                      <p>{{main.descriptionTwo}}</p>
           </div>
 
           <div :class="{ pressAnimation: button.right }">
@@ -205,7 +207,7 @@ console.log('index', main.selectedImageIndex);
           <div class="colors">
             <div class="wrapper_colors">
               <p>new arrival</p>
-              <p>nike joyride</p>
+              <p>{{main.sneakerName}}</p>
 
 
                 <div class="colors3">
@@ -239,7 +241,7 @@ console.log('index', main.selectedImageIndex);
     <div v-for="(item, index) in data" :key="item.code">
         <div class="sneakers">
           <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === main.selectedImage ? '4px solid #5CE1E6' : 'none' }">
-              <img :src="color.image"  @click="findImage(color.image, colorIndex, item.colors, color.code, data.find((i) => i.colors.some((e) => e.image === color.image)).name)">
+              <img :src="color.image"  @click="findImage(color.image, colorIndex, item.colors, color.code, data.find((i) => i.colors.some((e) => e.image === color.image)).name, item.title, item.description, item.title_two, item.description_two, item.date)">
           </div>
         </div>
       </div>
@@ -628,7 +630,7 @@ position: absolute;
     /* realse date section  */
     .date ul li:nth-child(2){
     font-family: Roboto, sans-serif;
-    font-size: 26px;
+    font-size: 23px;
     font-weight: 750;
     line-height: 38px;
     letter-spacing: 0em;
