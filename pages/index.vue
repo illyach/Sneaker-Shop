@@ -1,12 +1,12 @@
 <script setup>
-const inputCategory = ["Home", "New Arrivals", "Sale", "Clothing" ]
+const inputCategory = ["Home", "New Arrivals", "Sale", "Clothing"]
 
 const { data } =  useFetch( () => '/api/sneakers' );
 
 const main = reactive({
-      selectedImage: '/blu_fly_by_mid.png',
+      selectedImage: '/teal_joyride.png',
       selectedImageIndex: null,
-      selectedImageColor: null, 
+      selectedImageColor: '#FFA500', 
       selectedImageArray: [],
       selectedColorImage: '',
       selectedSneakerName: 'JOYRIDE',
@@ -14,15 +14,14 @@ const main = reactive({
       selectedSneakerNameSecondWord: '',
       colorsCode: [],
       arrImages:['/blu_fly_by_mid.png', '/orange_fly_by_mid.png', '/white_fly_by_mid.png'],
-      title: '',
-      titleTwo: '',
-      description: '',
-      descriptionTwo: '',
-      date: '',
-      sneakerName: ''
-
-
+      title: 'ABSORBS THE IMPACT',
+      titleTwo: 'Feels Fresh Every Run',
+      description: 'That soft ride doesn’t just go easy on your feet—it helps your whole body feel good.',
+      descriptionTwo: 'Designed to work for every runner, at every stage of their journey.',
+      date: 'JANUARY 6, 2023',
+      sneakerName: 'NIKE JOYRIDE'
 })
+
 
 const button = reactive({
   right: false,
@@ -76,9 +75,6 @@ function  findColorImage(colorCode, arr){
   let findColorCodeImage = arr.find((i) => i.code === colorCode).image
   main.selectedColorImage = findColorImageCode
   main.selectedImage = findColorCodeImage
-  console.log("findColorImage-------------")
-  console.log('selectedColorImage', main.selectedColorImage)
-  console.log('findColorCodeImage', main.selectedImage)
 }
 
 
@@ -106,23 +102,8 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
 <template>
 
 
-     <app-header/>
-
-
-<!-- Navigation Input -->
-<div class="input_container">
-    <div class="input_wrapper">
-            <div v-for="element in inputCategory" :key="element" class="input_element">
-                <input
-                  name="category"
-                  :id="element"
-                  type="radio"
-                />
-                <label :for="element">{{ element }}</label>
-        </div>
-    </div>
-</div>
-<!-- Navigation End -->
+<header-section/>
+<header-nav/>
 
 
 <!--  Left side of the page-->
@@ -159,14 +140,14 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
 
 
             <!-- Centered elements | sneaker model NAME & sneaker IMAGE -->
-          <div class="name">
+          <div class="name" >
             <img class="right_grapes" src="/grapes.png">
             <p class="nike">&nbsp;NIKE</p>
             <p class="joyride" :style="{ 'padding-left': main.selectedSneakerName === 'JOYRIDE' || (main.selectedSneakerName.charAt(0) === 'A') ? '200px' : '0px' }">
               {{main.selectedSneakerName}}
             </p>
 
-          <Transition name="animate">
+          <Transition name="animate" >
 
               <div class="my_img"  v-if="buttonPressed" :style="'display:none'">
                 <div>
@@ -190,7 +171,8 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
 
 
     <!--Right side of the page-->
-          <div class="r" />
+
+          <div class="r"/>
          <div class="description_right">
                       <p>{{main.titleTwo.toUpperCase()}}</p>
                       <p>{{main.descriptionTwo}}</p>
@@ -232,6 +214,11 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
         <button>View Details →</button>
       </div>
     </div>
+
+    
+
+
+
 
     <div class="items_text">
         <p>NEW ARRIVALS COLLECTION</p>
@@ -284,59 +271,7 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
     opacity: 0;
   }
 
-    /* Navigation inputs Start */
-  .input_container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    margin: 0 auto;
-    border-radius: 25px;
-    padding: 5px;
-    background-color: #ffffff;
-    height: 56px;
-    width: max-content;
-    margin-bottom: 60px;
-    box-shadow: 0px 4px 20px 0px #8E8E8E1A;
-  }
-
-  .input_wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .input_element input {
-    display: none;
-  }
-
-  .input_element {
-    margin-left: 40px;
-    margin-right: 40px;
-  }
-
-  .input_element label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    font-family: Roboto, sans-serif;
-    font-size: 18px;
-    line-height: 24px;
-    color: #7E7E7E;
-    padding: 0 22px;
-    border-radius: 8px;
-    cursor: pointer;
-    height: 40px;
-  }
-
-  .input_element input:checked ~ label {
-    background: #1E1E1E;
-    border-radius: 30px;
-    color: #ebe9fe;
-
-  }
-
-  /* NAvigation inputs End */
+   
 
 
 
@@ -349,7 +284,7 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
 
 .right_arrow{
     transform:scale(-1,1);
-    padding-left: 30px;
+
 }
 
 
@@ -544,7 +479,7 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
     margin-top:50px;
     width: 1500px;
     height: 800px;
-    border: 1px solid black;
+
     align-content: space-between
   }
 
