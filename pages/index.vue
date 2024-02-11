@@ -19,7 +19,8 @@ const main = reactive({
       description: 'That soft ride doesn’t just go easy on your feet—it helps your whole body feel good.',
       descriptionTwo: 'Designed to work for every runner, at every stage of their journey.',
       date: 'JANUARY 6, 2023',
-      sneakerName: 'NIKE JOYRIDE'
+      sneakerName: 'NIKE JOYRIDE',
+      sneakerPrice: 0
 })
 
 
@@ -27,8 +28,10 @@ const button = reactive({
   right: false,
   left: false,
   addToBag: false,
-  viewDetails: false
+  viewDetails: false,
+  addToBagProps: false
 })
+
 
 const buttonPressed = ref(false)
 
@@ -70,7 +73,8 @@ function buttonAddToBagClicked(){
 function nextImage(){
   borderObject = 'none'
   buttonPressed.value = true
-  
+  let findPrice = main.selectedImageArray.find((i) => i.image === main.selectedImage)?.price
+  console.log(findPrice)
 
   setTimeout(() => {
     buttonPressed.value = false
@@ -82,17 +86,20 @@ main.selectedImage = main.arrImages[currentIndex]
 }
 
 
-function  findColorImage(colorCode, arr){
+function findColorImage(colorCode, arr){
   borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
 
   let findColorImageCode = arr.find((i) => i.code === colorCode).code
   let findColorCodeImage = arr.find((i) => i.code === colorCode).image
+  let findPriceByColor = arr.find((i) => i.code === colorCode).price;
   main.selectedColorImage = findColorImageCode
   main.selectedImage = findColorCodeImage
+  main.price = findPriceByColor
+  console.log(main.price)
 }
 
 
-function findImage(image, index, arr, color, sneaker_name, title, description, title_two, description_two, date ) {
+function findImage(image, index, arr, color, sneaker_name, title, description, title_two, description_two, date, price ) {
   borderObject = 'none'
   main.selectedImage = image;
   main.selectedImageIndex = index
@@ -107,6 +114,10 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
   main.descriptionTwo = description_two
   main.sneakerName = sneaker_name
   main.date = date
+  main.sneakerPrice = price
+  console.log(main.sneakerPrice)
+
+
 }
 
 
@@ -116,7 +127,7 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
 <template>
 
 
-<header-section/>
+<header-section :props="button.addToBagProps ? { name: main.sneakerName, image: main.selectedImage, price: main.sneakerPrice } : null" />
 <header-nav/>
 
 
@@ -224,7 +235,7 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
 
     <div class="buttons">
       <div class="buttons_wrapper">
-        <button :style="{transform: button.addToBag ? 'scale(0.97)' : 'scale(1)'}" @click="buttonAddToBagClicked()">+ Add to Bag</button>
+        <button :style="{transform: button.addToBag ? 'scale(0.97)' : 'scale(1)'}" @click="buttonAddToBagClicked(), button.addToBagProps = true">+ Add to Bag</button>
         <button :style="{transform: button.viewDetails ? 'scale(0.97)' : 'scale(1)'}" @click="buttonViewDetailsClicked()">View Details →</button>
       </div>
     </div>
@@ -242,7 +253,7 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
     <div v-for="(item, index) in data" :key="item.code">
         <div class="sneakers">
           <div v-for="(color, colorIndex) in item.colors" :key="color.code" class="sneaker" :style="{ border: color.image === main.selectedImage ? '4px solid #5CE1E6' : 'none' }">
-              <img :src="color.image"  @click="findImage(color.image, colorIndex, item.colors, color.code, data.find((i) => i.colors.some((e) => e.image === color.image)).name, item.title, item.description, item.title_two, item.description_two, item.date)">
+              <img :src="color.image"  @click="findImage(color.image, colorIndex, item.colors, color.code, data.find((i) => i.colors.some((e) => e.image === color.image)).name, item.title, item.description, item.title_two, item.description_two, item.date, color.price)">
           </div>
         </div>
       </div>

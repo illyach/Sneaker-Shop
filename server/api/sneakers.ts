@@ -12,27 +12,32 @@ export default defineEventHandler((event) => {
         {
         name: "blue",
         code: "#fca103",
-        image: "/orange_joyride.png"
+        image: "/orange_joyride.png",
+        price: 113.23
         },
         {
         name: "pink",
         code: "#db09bc",
-        image: "/violet_joyride.png"
+        image: "/violet_joyride.png",
+        price: 103.70
         },
         {
         name: "black",
         code: "#131414",
-        image: "/black_joyride.png"
+        image: "/black_joyride.png",
+        price: 123.92
         },
         {
             name: "bluee",
             code: "#15cbeb",
-            image: "/teal_joyride.png"
+            image: "/teal_joyride.png",
+            price: 130.34
         },
         {
             name: "blue",
             code: "#aefaaa",
-            image: "/green_joyride.png"
+            image: "/green_joyride.png",
+            price: 130.54
             },
         ],
 
@@ -49,27 +54,32 @@ export default defineEventHandler((event) => {
         {
         name: "blue",
         code: "#290ac4",
-        image: "/blu_fly_by_mid.png"
+        image: "/blu_fly_by_mid.png",
+        price: 78.33
         },
         {
         name: "orange",
         code: "#d2d2d2",
-        image: "/white_fly_by_mid.png"
+        image: "/white_fly_by_mid.png",
+        price: 79.99
         },
         {
         name: "red",
         code: "#ffb469",
-        image: "/orange_fly_by_mid.png"
+        image: "/orange_fly_by_mid.png",
+        price: 87.56
         },
         {
             name: "bluee",
             code: "#30483a",
-            image: "/green_fly_by_mid.png"
+            image: "/green_fly_by_mid.png",
+            price: 95.15
         },
         {
             name: "blue",
             code: "#0f0f0f",
-            image: "/black_fly_by_mid.png"
+            image: "/black_fly_by_mid.png",
+            price: 78.27
             },
         ],
 
