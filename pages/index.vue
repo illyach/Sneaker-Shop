@@ -25,7 +25,9 @@ const main = reactive({
 
 const button = reactive({
   right: false,
-  left: false
+  left: false,
+  addToBag: false,
+  viewDetails: false
 })
 
 const buttonPressed = ref(false)
@@ -36,10 +38,10 @@ let borderObject = '0 0 0 4px white, 0 0 0 6px #DADADA';
 let currentIndex = 0
 
 function rightButtonAnimation(){
-  button.right = true
-
+  button.right = true 
+  
   setTimeout(() => {
-    button.right = false 
+      button.right = false
   }, 180)
 }
 
@@ -51,7 +53,19 @@ function leftButtonAnimation(){
   }, 180)
 }
 
+function buttonViewDetailsClicked(){
+  button.viewDetails = true
+  setTimeout(() => {
+    button.viewDetails = false
+  }, 180)
+}
 
+function buttonAddToBagClicked(){
+  button.addToBag = true
+  setTimeout(() => {
+    button.addToBag = false
+  }, 180)
+}
 
 function nextImage(){
   borderObject = 'none'
@@ -210,8 +224,8 @@ function findImage(image, index, arr, color, sneaker_name, title, description, t
 
     <div class="buttons">
       <div class="buttons_wrapper">
-        <button>+ Add to Bag</button>
-        <button>View Details →</button>
+        <button :style="{transform: button.addToBag ? 'scale(0.97)' : 'scale(1)'}" @click="buttonAddToBagClicked()">+ Add to Bag</button>
+        <button :style="{transform: button.viewDetails ? 'scale(0.97)' : 'scale(1)'}" @click="buttonViewDetailsClicked()">View Details →</button>
       </div>
     </div>
 
